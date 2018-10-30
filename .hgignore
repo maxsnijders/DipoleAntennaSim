@@ -1,0 +1,9 @@
+syntax: glob
+*.pyc
+Output/*
+.*
+Verslag/*.log
+Verslag/*.out
+Verslag/*.synctex.gz
+Verslag/*.aux
+Verslag/*.bak

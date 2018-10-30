@@ -1,0 +1,2 @@
+Polarisation angle:
+	The angle, relative to the direction in which the antenna lies.

@@ -1,0 +1,547 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Journal Article
+% LaTeX Template
+% Version 1.3 (9/9/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[twoside, 12pt]{article}
+
+\usepackage{mathtools, amsmath, amsfonts, tikz}
+\usepackage{hyperref}
+\usepackage{lipsum} % Package to generate dummy text throughout this template
+\usepackage{graphicx}
+
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=15pt,margin=1in]{geometry} % Document margins
+\usepackage{multicol} % Used for the two-column layout of the document
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{float} % Required for tables and figures in the multi-column environment - they need to be placed in specific locations with the [H] (e.g. \begin{table}[H])
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+\usepackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\Roman{subsection}} % Roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{calligra}
+\DeclareFontShape{T1}{calligra}{m}{n}{<->s*[2.0]callig15}{}
+\DeclareMathAlphabet{\mathcalligra}{T1}{calligra}{m}{n}
+\newcommand{\scriptr}[1]{\ensuremath{\mathcalligra{#1}}}
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+%\fancyhead[C]{Antennae $\bullet$ June 2014 $\bullet$ Fysica van Moderne Echnologie} % Custom header text
+
+\fancyhead[RO,LE]{Antennae}
+\fancyfoot[LE,RO]{\thepage}
+\fancyhead[LO,RE]{Physics of Modern Technology}
+
+\fancyfoot[RO,LE]{\thepage} % Custom footer text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\title{\vspace{-15mm}\fontsize{24pt}{10pt}\selectfont\textbf{Antennae: \\ \fontsize{20pt}{10pt}\selectfont Signals, Noise reduction and Directivity } } % Article title
+
+\author{
+\large
+\textsc{Mark Knigge \& Max Snijders}\thanks{\texttt{s1436929, s1409123}}\\[2mm] % Your name
+\normalsize Leiden University\\ % Your institution
+\normalsize \textit{Supervised by: } dr. H. Papathanassiou\thanks{papathanassiou@physics.leidenuniv.nl}
+\vspace{-5mm}
+}
+\date{}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Insert title
+
+\thispagestyle{fancy} % All pages have headers and footers
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+\begin{abstract}
+
+\noindent An understanding of the principles behind the dual dipole antenna is developed using physics and numerical modeling as guidelines. We look at antenna designs and their efficacy using several measures. The efficacy of the dual dipole antenna as compared to the standard dipole antenna is demonstrated. A real-world example is used to illustrate a practical application of this research.
+
+\end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\begin{multicols}{2} % Two-column layout throughout the main article text
+
+\section{Introduction}
+
+\lettrine[nindent=0em,lines=3]{A}ntennae are vital parts of modern infrastructure. They are used to both transmit and receive signals, for detection of objects but also for data transmission. This article will deal with the basic principles behind electromagnetic radiation, antennae, noise reduction and antenna directivity.
+
+
+%------------------------------------------------
+
+\section{Electromagnetic radiation}
+Electromagnetic radiation is comprised of two parts: an oscillating electric field and an oscillating magnetic field. These two fields are spatially perpendicular to each other, but both propagate linea recta in the same direction, perpendicular to the directions of both the electric and magnetic components of the radiation. This is illustrated in figure \ref{F:elec_mag_field}.
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/elec_mag_field.png}
+	\captionof{figure}{Electric and magnetic field components and direction of propagation of electromagnetic radiaton. Image credit: \url{http://www.ndt-ed.org}.}
+	\label{F:elec_mag_field}
+\end{Figure}
+
+This radiation is characterized using several measures:
+\begin{itemize}
+	\item Amplitude: The units for the amplitude of the electric and magnetic components are different, but we measure electric fields in Newton per Coulomb, and the magnetic field in Tesla.
+	\item Frequency: Sometimes wavelength is used for the same purpose. Both indicate the periodicity of the signal: how much time/space is needed for the wave to fully cycle through its phases. Frequency is the inverse of the time that is needed and is therefore an indication of how many times per unit time the signal is periodic.
+	\item Polarization: The direction of the electric field component of the electromagnetic wave. This can be a fixed direction, but this can also be periodic or random.
+\end{itemize}
+
+For the purposes of this article the electric field component of the electromagnetic wave will be relevant, as described in the next section "Antenna Principles" (Section \ref{sec:antenna_principles}) . The electric component of an electromagnetic wave can be described using the following equation (equation \ref{eq:elec_field}): 
+
+\begin{align}
+	\label{eq:elec_field}
+	E = E_0 \cdot \cos{(\theta)} \cdot e^{i \cdot 2 \pi \cdot \nu \cdot t + \phi_0}
+\end{align}
+Where $E$ is the electric field in a certain direction in Newton/Coulomb, $E_0$ is the amplitude of the electric field component of the incoming electromagnetic radiation in Newton/Coulomb, $\theta$ is the angle between the direction in which we are measuring and the polarization of the incoming electromagnetic wave at the measured position in radians, $\nu$ is the frequency of the electromagnetic wave in Hertz, $t$ is the time at which we're measuring in seconds and $\phi_0$ is the phase of the electric field in radians at $t = 0$. 
+
+These principles and equation \ref{eq:elec_field} will be used extensively throughout the rest of this text. 
+
+Electromagnetic radiation is used extensively throughout modern technology for the transmission of data. For this purpose, a transmitter encodes data onto a carrier wave by either changing the carrier wave's amplitude (known as Amplitude Modulation) or by changing the carrier wave's frequency slightly (known as Frequency Modulation). The sent data is then encoded onto these changes.
+
+%------------------------------------------------
+
+\section{Antenna Principles}
+\label{sec:antenna_principles}
+An antenna in all generality is a piece of electrically conducting material used to in some way receive or transmit electromagnetic radiation. In this article we will confine ourselves to straight-wire antennae. The magnetic component of the electromagnetic radiation is perpendicular to the direction of propagation. We know that magnetic fields influence electrons or other charged particles through the Lorentz force as illustrated in equation \ref{eq:lorentz}.
+
+\begin{align}
+	\label{eq:lorentz}
+	\vec{F} = q \left(\vec{E} + v \times \vec{B} \right)
+\end{align}
+
+Where $v$ is the speed of the charged particles, $\vec{B}$ is the magnetic field, $\vec{E}$ is the electric field, $q$ is the charge of the particle in question and $\vec{F}$ is the resulting force acting upon the particle. 
+
+We can therefore see that the acceleration of the electrons in the conducting wire that forms the antenna is perpendicular to the speed of the electrons, which, requiring that the electrons can only move inside the wire must be perpendicular to the direction of the wire itself. But since the electrons can only move inside of the wire, the acceleration due to the magnetic component of the electromagnetic radiation must have no influence on the calculations on current and potential, since for these things, the acceleration and speed perpendicular to the wire itself must be irrelevant because we only measure electron movement in the direction parallel to the wire. For this reason we will only deal with the electric field component of electromagnetic radiation throughout the rest of this article. 
+
+The electric field will accelerate the electrons in the wire, as illustrated by equation \ref{eq:lorentz}. These accelerations cause the potential and current changes in the antenna and in attached wires and its these effects that we will base our model and calculations on.
+
+%------------------------------------------------
+
+\section{Dipole}
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/dipole.png}
+	\captionof{figure}{Schematic of a dipole antenna. Image credit: \url{http://www.angelfire.com/mb/amandx/dipole.html}}
+	\label{F:dipole_antenna}
+\end{Figure}
+
+The basic design of a dipole consists of a metal rod with a length that is equal to half the wavelength of the signal that one wants to be received.  By making the antenna half a wavelength long the potential difference between the both ends will be as large as possible, +A and -A respectively. In the case of a metal rod however the two sides of the piece of conducting metal are connected and the potential difference will therefore be zero. Therefore there is a gap at the center of the dipole antenna and the cables running to both halves will be separated. A coaxial cable consists of a core of conducting metal, wrapped in an insulating around which a second conducting layer is placed which is surrounded in another conducting layer. A coax cable is a practical means of transporting the signal from the dipole as one part of the antenna is connected to the inner conductor and the other part of the antenna is connected to the outer conductor of the cable. In this way the total signal received from the dipole antenna is the potential difference between the two conducting layers of the coax cable.
+
+The signal on a dipole antenna is visualized in figures \ref{F:sig_single_dipole_noiseless} and \ref{F:sig_single_dipole_withnoise}. With the latter also visualizing noise on the antenna of 7 times the frequency of the antenna's intended frequency.
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/Linear[Harmonic]-Linear[Harmonic]_sig_single_dipole_pure.png}
+	\captionof{figure}{Signal on a dipole antenna for a source vertically above the antenna. Signal Strength is normalized.}
+	\label{F:sig_single_dipole_noiseless}
+\end{Figure}
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/Linear[Harmonic]-Linear[Harmonic]_sig_single_dipole_noise_1.png}
+	\captionof{figure}{Signal on a dipole antenna for a source vertically above the antenna, with noise coming from the side. Noise has 7 times the frequency that the antenna was designed for. Both signal and noise have the same amplitude. Signal strength is normalized.}
+	\label{F:sig_single_dipole_withnoise}
+\end{Figure}
+
+
+\section{Potential in Dipole}
+Every antenna type has a different potential difference created on its terminal(s) resulting from incoming electromagnetic radiation. In this section we will first develop an equation that describes this potential difference resulting from harmonic electromagnetic radiation based on work by K.T. McDonald \cite{verg13} . We will then look into more general forms of electromagnetic radiation.
+
+\subsection{Potential due to harmonic electromagnetic radiation}
+This subsection is based and largely taken from work by K.T. McDonald \cite{verg13} from Princeton University.
+The  electric field component from incident electromagnetic radiation for a harmonic radiation source can be described for linearly polarized light with polarization in the $\hat{z}$ direction by equation \ref{eq:Efieldantenna}. This derivation will assume an antenna with half-height $h$.
+
+\begin{align}
+	\label{eq:Efieldantenna}
+	\vec{E_{in}} = E_0 \cdot e^{-i \left( kx - \omega t\right)} \hat{z}
+\end{align} 
+
+Where $E_0$ is the electric field amplitude in the $\hat{z}$ direction, $k$ is the wave's wave number, t is the time of measurement and $\omega$ is the angular frequency of the radiation. This electric field oscillates as described in section \ref{sec:antenna_principles} a current distribution in the antenna's wires. This oscillates with the same (angular) frequency as does the incoming electric field as described in equation \ref{eq:currentAntenna}.
+
+\begin{align}
+	\label{eq:currentAntenna}
+	\vec{J} \left(\vec{r}, t  \right) = \vec{J} \left(\vec{r} \right) \cdot e^{i \omega t}
+\end{align}
+
+Where $\vec{J}$ is the current distribution in the wire. The retarded vector potential for this current distribution is described by equation \ref{eq:retardedvectorpotential}.
+
+\begin{align}
+	\label{eq:retardedvectorpotential}
+	\vec{A} \left( \vec{r}, t \right) &= \vec{A} \left( \vec{r} \right) \cdot e^{i \omega t} \\
+	&= \frac{\mu_0}{4 \pi} \int \frac{\vec{J} \left( \vec{r}', t' \equiv t - \scriptr{r} / c\right)}{\scriptr{r} } \; d \tau \\ 
+	&= \frac{\mu_0}{4 \pi} \int \vec{J} \left( \vec{r}' \right) \frac{e^{ik \scriptr{r}}}{\scriptr{r}} d \tau e^{i \omega t} \\
+	&= \vec{A} \left( \vec{r} \right) \cdot e^{i \omega t}
+\end{align}
+
+Where $\scriptr{r}$ is the distance from source to position of the volume element and $\mu_0$ is the vacuum permeability. Since our antenna consists of a very thin wire oriented in the $\hat{z}$ direction, we know that the current density is well approximated by a current $I(z)$. Therefore, the vector potential only has a $z$ component in cylindrical co\"ordinates  ($\rho$, $\phi$, $z$) as illustrated in equation \ref{eq:vecpotz}.
+
+\begin{align}
+	\label{eq:vecpotz}
+	A_z \left( \vec{r} \right) = \frac{\mu_0}{4 \pi} \int I(z') \frac{e^{-ik \scriptr{r}} }{\scriptr{r}} \; dz'
+\end{align}
+We know that according to the Lorenz gauge equation \ref{eq:lorenzgauge} must hold for the vector potential of the current distribution and the potential of the charge distribution.
+
+\begin{align}
+	\label{eq:lorenzgauge}
+	\vec{\nabla} \vec{A} + \frac{1}{c^2} \frac{\partial V}{\partial t} = 0
+\end{align}
+
+With $V$ the scalar potential of the response field: $V(\vec{r},t) = V)(\vec{r}) e^{i\omega t}$.
+These two fields are therefore related according to equation \ref{eq:vecpotelpot}.
+
+\begin{align}
+	\label{eq:vecpotelpot}
+	V(\vec{r}) = \frac{i c}{k} \frac{\partial A_z(\vec{r})}{\partial z} \equiv \frac{ic}{k} \; \partial_z A_z(\vec{r})
+\end{align}
+ 
+The response electric and magnetic fields, $\vec{E}\left(\vec{r}, t \right) = \vec{E}\left(\vec{r} \right) e^{i\omega t}$ and $\vec{B}\left(\vec{r}, t \right) = \vec{B}\left(\vec{r} \right) e^{i\omega t}$ respectively can thus be calculated from the vector potential $A_z(\vec{r})$ as described in equations \ref{eq:elrespfield} and \ref{eq:magrespfield}. 
+
+\begin{align}
+	\vec{E}(\vec{r}) &= - \vec{\nabla}V(\vec{r} - i\omega\vec{A}(\vec{r})	 \\
+	\label{eq:elrespfield}
+	&= -\frac{ic}{k} \left[ \partial^2_{r,z} A_z(\vec{r} \hat{\rho} _+ \left( \partial^2_z + k^2 \right) A_z(\vec{r}) \hat{z} \right]
+\end{align}
+
+\begin{align}
+	\vec{B}(\vec{r}) &= \vec{\nabla} \times \vec{A}(\vec{r}) \\
+	\label{eq:magrespfield}
+	&= - \partial_{\rho} A_z (\vec{r}) \hat{\phi}
+\end{align}
+
+We know that as a boundary condition the total electric field at the surface, $\vec{E}_{in} +\vec{E}$ of the conducting wires must have no tangential component. For a thin wire such as in our case this means that the $z$ component of the total electric field, parallel to our antenna, must vanish, as illustrated by the requirement on the resulting electric field from the charge distribution in the wire in equation \ref{eq:nozcomp}.
+
+\begin{align}
+	\label{eq:nozcomp}
+	E_z(0, 0, z) = - E_{in} = - E_0
+\end{align}
+
+If we say that there's a finite distance between the closest ends of the two parts of the dipole antenna, as illustrated in section \ref{sec:Dipole}, which we shall call $d$, with $d \ll h$.
+ Using equation \ref{eq:elrespfield} we find a differential equation for the vector potentials in the space between the two wires, as described in equation \ref{eq:diffeqpotbetweenwires}. 
+ 
+\begin{align}
+	\label{eq:diffeqpotbetweenwires}
+	\left( \partial^2_z + k^2 \right) A_z (0, 0, z) &= \frac{ik}{c} E_z(0, 0, 0)  \\
+	&= - \frac{ik}{c} E_0 
+\end{align}
+
+Solutions to the homogeneous differential equation are 0, $\cos{kz}$ and $\sin{kz}$, whereas the inhomogeneous part has $\frac{-i E_0}{kc}$ as a solution. The general solution is therefore as described in equation \ref{eq:gensoldiffeqpotbetweenwires}.
+
+\begin{align}
+	\label{eq:gensoldiffeqpotbetweenwires}
+	\begin{split}
+	A_z(0, &0, d/2 \le z \le h) = \\
+	&C_1 \cos{kz} + C_2 \sin{kz} - \frac{i E_0}{kc}
+	\end{split}
+\end{align}
+
+Due to symmetry considerations we expect the vector potential will be symmetric about $z = 0$. So the solution for the interval $[-h, -d/2]$ can be written as in equation \ref{eq:solutionbelowzis0}. 
+
+\begin{align}
+	\label{eq:solutionbelowzis0}
+	\begin{split}
+	A_z(0, &0, -h \le z \le -d/2) = \\
+	&C_1 \cos{kz} - C_2 \sin{kz} - \frac{i E_0}{kc}
+	\end{split}
+\end{align}
+
+We need additional conditions for our system if we are to determine the constants $C_1, C_2$. We note that for a circuit with no load attached to the antenna terminals, the current $I(z)$ must vanish at the ends of the conducting wires, explicitly at $z = -h, -d/2, d/2$ and $h$. We know that for a thin-wire the vector potential on the wire is proportional to the current in the wire at that point. For the thin-wire approximation, the needed conditions are such that the vector potential also vanishes at the aforementioned ends of the conducting wires. This gives us for our constants $C_1, C_2$ the equations \ref{eq:c1} and \ref{eq:c2}.
+
+\begin{align}
+	\label{eq:c1}
+	C_1 = \frac{i E_0}{kc}
+\end{align}
+
+\begin{align}
+	\label{eq:c2}
+	C_2 = - \frac{i E_0}{kc} \frac{1 - \cos{kh}}{\sin{kh}}
+\end{align}
+
+Combining these with equation \ref{eq:vecpotelpot} gives is the potential difference accross the terminals as described in equation \ref{eq:potterminals}.
+
+\begin{align}
+	\label{eq:potterminals}
+	\begin{split}
+		V_{\mbox{term}} &= V(0, 0, d/2) - V(0, 0, -d/2)  \\
+		&= \frac{ic}{k} \left( A'_z(0,0,d/2) - A'_z(0,0,-d/2) \right) \\
+		&= 2 ic C_2 = - \frac{2 E_0}{k} \frac{1 - \cos{kh}}{\sin{kh}}
+	\end{split}
+\end{align}
+
+Or alternatively the full form:
+\begin{align}
+	\label{eq:potterminalsfull}
+	\begin{split}
+	&V_{\mbox{term}}(t) =  \\
+	&- \frac{2 E_0}{k} \frac{1 - \cos{kh}}{\sin{kh}} \cdot \cos{\theta} \cdot e^{i \omega (t - d/c) + \phi_0}
+	\end{split}
+\end{align}
+With $d$ the distance from antenna to source. 
+
+Equation \ref{eq:potterminalsfull} will be used extensively throughout the rest of this article. The signal that this equation gives can be seen in figure \ref{F:sig_lin_harm_nonoise}.
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/Linear[Harmonic]-Linear[Harmonic]_sig_single_dipole_pure.png}
+	\captionof{figure}{Signal on a dipole antenna for a radio source with $\lambda$ equal to the antenna length. Signal strength is normalised}
+	\label{F:sig_lin_harm_nonoise}
+\end{Figure}
+
+
+\subsection{ Superposition}
+We know that for electromagnetic waves the superposition holds: an electromagnetic wave may be described fully by its constituent parts. If the solution for any non-harmonic wave is to be found using equation \ref{eq:potterminalsfull} we must therefore first split it into its harmonic parts using a Fourier Transform. Because we cannot distinguish between a signal or the sum of harmonic signals that result from a perfect Fourier Transform, the resulting potential should also be the same for both the original signal as for the sum of its harmonic parts. We also know that polarization can also be seen as superposition of different waves: circular polarization is a superposition of two waves with the same frequency, but with a phase shift of $\pi/2$. In general, any polarization can be written as the sum of linearly polarized light.
+
+Figure \ref{F:FFT_Demo} demonstrates how a signal can be split into its constituent parts using a Fast Fourier Transform (FFT). The signal can then be reconstructed by adding up the split-up parts.
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/FFT_Demo/Sines+cosines_components.png}
+	\captionof{figure}{Signal and its harmonic components, separated using FFT.}
+	\label{F:FFT_Demo}
+\end{Figure}
+
+
+\section{Dual Dipole}
+As stated earlier dipole antennae are most sensitive to radiation coming from the plane perpendicular to the antenna. To realize the best possible reception the antenna is positioned so that the source intended to be received is in that plane. This means however that any noise coming from the same perpendicular plane, which can be in a very different direction than the aforementioned source, greatly influences the detected signal as well. A commonly utilized solution to this problem is the installation of a second dipole antenna parallel to the first one. If we define the orientation of both the antennae as our x-axis, the location of the intended source as our z-axis and the direction perpendicular to both as the y-axis this configuration can be very effectively used to filter out noise coming from the direction of the y-axis.
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/dualdipole.jpg}
+	\captionof{figure}{Schematic of a dual dipole antenna. Image credit: \url{http://receiverforjupiter.tripod.com/Images/antenna.jpg}}
+	\label{F:FFT_Demo}
+\end{Figure}
+
+
+
+If the two parallel antennae are placed half a wavelength apart, noise signals with that wavelength coming from the y-axis will be exactly oppositely phased at both antennae. The opposed deviations in the signal will cancel out when the signals from both antennae are added up. Therefore the dual dipole antenna configuration will be sensitive to signals coming from the z-axis but will neglect signals coming from the horizontal plane as is visualized in the section Directivity (\ref{sec:directivity}).
+
+In comparison to figures \ref{F:sig_single_dipole_noiseless} and \ref{F:sig_single_dipole_withnoise} the dual dipole is quite capable of filtering out noise from the side. This is visualized in figures  \ref{F:dual_dipole_first_antenna}, \ref{F:dual_dipole_second_antenna} and \ref{F:dual_dipole_combined}, where the first two figures show the signals on the two antennae that form the dual dipole, whereas the third figure shows the signal from the first two figures averaged out, showing how the noise coming from the side is filtered out perfectly.
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/Linear[Harmonic]-Linear[Harmonic]_sig_single_dipole_noise_1.png}
+	\captionof{figure}{Signal on a dipole antenna for a source vertically above the antenna, with noise coming from the side. Noise has 7 times the frequency of the design frequency of the antenna. Both signal and noise have the same amplitude. Signal strength is normalised. This figure displays the signal on the first antenna of a pair of antennae together forming a dual dipole.}
+	\label{F:dual_dipole_first_antenna}
+\end{Figure}
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/Linear[Harmonic]-Linear[Harmonic]_sig_single_dipole_noise_2.png}
+	\captionof{figure}{Signal on a dipole antenna for a source vertically above the antenna, with noise coming from the side. Noise has 7 times the frequency of the design frequency of the antenna. Both signal and noise have the same amplitude. Signal strength is normalized. This figure displays the signal on the second antenna of a pair of antennae together forming a dual dipole.}
+	\label{F:dual_dipole_second_antenna}
+\end{Figure}
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/Linear[Harmonic]-Linear[Harmonic]_sig_double_dipole_noise.png}
+	\captionof{figure}{Signal on a dual dipole antenna for a source vertically above the antenna, with noise coming from the side. Noise has 7 times the frequency of the design frequency of the antenna. Both signal and noise have the same amplitude. Signal strength is normalized. This signal is built from the signals of two constituent antennae, which are averaged out. }
+	\label{F:dual_dipole_combined}
+\end{Figure}
+
+
+\section{Directivity}
+\label{sec:directivity}
+In the previous sections the discussed scenarios merely include sources, both intended and noise, at ideal perpendicular angles, along the defined axis. As stated in equation \ref{eq:elec_field} the sensitivity decreases by a factor $\cos{\theta}$ where $\theta$ is the angle between the orientations of the antenna and the direction of propagation of the signal. In a dual dipole configuration the sensitivity in the defined xz-plane is dependent on this relationship. The interdependent sensitivity in the yz-plane however is a more complex combination of the sensitivity of both antennae and the difference in phase caused by their mutual distance along the signals direction of propagation. The combined effect of the aforementioned dependencies can best be visualized in a directivity plot, such as in figure \ref{F:directivitysingledipoleparallel}. The body of a directivity plot represents the antennas sensitivity in every direction as for every data point its distance to the center is proportional to the antennas sensitivity in the corresponding direction.
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/directivity_parallel_singledipole.png}
+	\captionof{figure}{Directivity plot in the plane parallel to the antenna. Distance to the origin indicates signals strength, 1 being perfect reception.}
+	\label{F:directivitysingledipoleparallel}
+\end{Figure}
+
+For a single dipole antenna in the x-direction  the according normalised directivity plot is shown in figure \ref{F:directivitysingledipoleparallel}. Using the symmetry of the system this directivity can be expanded into the third dimension, including the z-axis.  Figure \ref{F:directivitysingledipole3d} shows the three-dimensional directivity plot of a single dipole configuration.
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/Selected_Frames/movie_Omnidirectional-Directivity-Single-Dipole_00053.png}
+	\captionof{figure}{3D Directivity plot for single dipole antenna positioned along the x-axis. Distance to the origin indicates signal strength. }
+	\label{F:directivitysingledipole3d}
+\end{Figure}
+
+This omnidirectional visualization of the antenna configurations sensitivity can also be applied to a dual dipole. This demonstrates a higher sensitivity along the intended z-axis and less sensitivity in the horizontal plane, along the x-axis as neither antenna is sensitive to radiation from that particular direction and along the y-axis as a result of the filtering behavior of the parallel dipole antennae. The complete omnidirectional directivity plot of the dual dipole configuration is shown in figure \ref{F:directivitydualdipole3d}.
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/Selected_Frames/movie_freq-dep-dir-plot_0000496.png}
+	\captionof{figure}{3D Directivity plot for a dual dipole antenna oriented along the x-axis, positioned in the xy plane. Distance to the origin indicates signal strength. }
+	\label{F:directivitydualdipole3d}
+\end{Figure}
+
+\section{Frequency Dependency}
+The effectivity of the dual dipole configuration was based on a mutual distance between the antennae of half a wavelength between the two antennae, thus noise with that particular wavelength coming from the defined y-axis will be filtered out.
+%hier plaatjes origineel signaal versus ontvangen signaal na filtering
+Noise however most of the times is spread over a frequency band. Its effectiveness for other frequencies as well as for its intended frequency depends on the difference in phase between the moments of reception at each antenna. By calculating the phase difference per signal frequency for every direction signals are coming from a directivity plot can be designed for each frequency noise.
+%hier een paar sexy plaatjes van bijvoorbeeld 3D directivity plots bij freq = 0.5, 1, 2 ofzo
+
+Figures \ref{F:dir0.128}, \ref{F:dir0.5} and \ref{F:dir2} show how the directivity changes for different source frequencies.
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/Selected_Frames/movie_freq-dep-dir-plot_0000013.png}
+	\captionof{figure}{Directivity plot for dual dipole antenna for signal frequency is $1/8$ times the frequency for which the antenna was designed.}
+	\label{F:dir0.128}
+\end{Figure}
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/Selected_Frames/movie_freq-dep-dir-plot_0000327.png}
+	\captionof{figure}{Directivity plot for dual dipole antenna for signal frequency is $1/2$ times the frequency for which the antenna was designed}
+	\label{F:dir0.5}
+\end{Figure}
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/Selected_Frames/movie_freq-dep-dir-plot_0000675.png}
+	\captionof{figure}{Directivity plot for dual dipole antenna for signal frequency is $2$ times the frequency for which the antenna was designed}
+	\label{F:dir2}
+\end{Figure}
+
+\section{Signal to Noise Ratio}
+In order to say whether for a certain source of noise and signal and antenna configuration the noise dominates over the source or the other way around, and to make this quantitative, we must define the signal to noise ratio. For a given sample, consisting of a set of signal strengths during a time interval, we define the signal to noise ratio as the average ratio between signal and noise, taking only those points in time where there is noise to be taken into account. This definition proves useful when calculating the signal to noise ratio for different noise frequencies, as shown in figures \ref{F:snratiosingledipole} and \ref{F:snratiosdualdipole}.
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/Signal-To-Noise-Ratio-Noise-Frequency-Single-Dipole.png}
+	\captionof{figure}{Signal to Noise ratio for different noise frequencies, normalized so that a frequency of 1 corresponds to the wavelength for which this antenna was designed (meaning it has a length of halve that wavelength) and with a signal of the frequency 1.}
+	\label{F:snratiosingledipole}
+\end{Figure}
+
+In figure \ref{F:snratiosingledipole} the $2k+1$ lines are marked, corresponding to those multiples of the base frequency $1$. These are also marked in figure \ref{F:snratiosdualdipole}, so as to illustrate the contrast between the two antenna designs. These frequencies are the ones at which noise, coming from the plane of the dual dipole antenna, is perfectly out of phase at the two antennae comprising a dual dipole antenna and is thus perfectly filtered out.	 
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/Signal-To-Noise-Ratio-Noise-Frequency-Dual-Dipole.png}
+	\captionof{figure}{Signal to Noise ratio for different noise frequencies, normalized so that a frequency of 1 corresponds to the wavelength for which this antenna was designed (meaning it has a length of halve that wavelength, with antennae placed half a wavelength apart) and with a signal of the frequency 1.}
+	\label{F:snratiosdualdipole}
+\end{Figure}
+
+
+\section{Signal processsing}
+To combine the signals from the two dipole antennae in the dual dipole configurations the potential differences between the conducting layers of the coax cables have to be added up. Here a technical complication arises as those coax cables have characteristic impedances, i.e. the optimum quotient of electric potential and current. This optimum exists because for this ratio of electric potential to current, there is no signal reflection within the coaxial cable, and therefore no reflecting waves within the cable can interfere with forward-propagating waves. If the signals were to be connected the impedance would be halved according to:
+
+\begin{align}
+	\label{eq:halfimpedance}
+	\frac{1}{Z_1,2}=\frac{1}{Z_1}+\frac{1}{Z_2}
+	Z_{1,2}=\frac{1}{2}Z_1=\frac{1}{2}Z_2
+\end{align}
+
+As a solution the impedance can be doubled again by inserting a transformer between the joining cables from the antennae and the combined cable leading to the receiver. By using a primary winding of seven turns and a secondary winding of 5 turns the electric potential can be increased by a factor $\frac{7}{5}$ and as the power $P=VI$ will theoretically remain constant the current will therefore decrease by a factor $\frac{5}{7}$. The impedance will then double again according to:
+
+\begin{align}
+	\label{eq:doubleimpedance}
+	Z_{\mbox{double}} =\frac{\frac{7}{5}U}{\frac{5}{7}I}=2 Z_{\mbox{original}}
+\end{align}
+
+In this way the impedance is restored to its original value which prevents reflection of waves of current/potential within the coaxial cable.
+
+\section{A Practical Example}
+A practical example of where this dual dipole antenna configuration can be very effectively utilized is for the detection of cosmic radio sources. Jupiter for example is a noticeable radio source. 70\% of Jupiter's mass is made up of hydrogen of which most is compressed so much that the electrons separate from the atomic nuclei. As Jupiter spins around its axis almost two and a half times faster than the Earth this mass of conducting hydrogen rotates quickly around Jupiter's core giving rise to its strong magnetic field. Also Io, which is vulcanically active and blowing out ions into its orbit around Jupiter, contributes to the generating of radio waves. Io moving through it's own ring of ions in combination with Jupiter's magnetic field together make up a strong source of radio waves, of which the detected intensity varies according to the orientation of Jupiter and its moon as seen from the Earth.
+
+This provides a clear example of a scenario in which the intended source, Jupiter and Io, is positioned in one particular direction whilst most of the noise comes from the plane perpendicular to that direction.
+
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/Random[Harmonic]-Linear[Harmonic]_sig_single_dipole_noise_1.png}
+	\captionof{figure}{Signal from a single dipole antenna where the source sends out randomly polarized light (as does Jupiter) and the noise sends out linearly polarized light (as does human society, the noise in our example). We can see that the linear noise is dominant in the signal, in contrast to the dual dipole as illustrated in figure \ref{F:jupdualdipole}.}
+	\label{F:jupsingledipole}
+\end{Figure}
+
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{Images/Random[Harmonic]-Linear[Harmonic]_sig_double_dipole_noise.png}
+	\captionof{figure}{Signal from a dual dipole antenna where the source sends out randomly polarized light (as does Jupiter) and the noise sends out linearly polarized light (as does human society, the noise in our example). We can see that the linear noise is filtered out quite well.}
+	\label{F:jupdualdipole}
+\end{Figure}
+
+
+
+\section{Appendices}
+The video files generated to display the 3D directivity plots used in this article are available on youtube: \\
+\begin{itemize}
+\item \url{https://www.youtube.com/watch?v=HGPMror2syc}
+\item \url{https://www.youtube.com/watch?v=8Wng2OdPoLQ}
+\item \url{https://www.youtube.com/watch?v=I_ANtA_6tiQ}
+\end{itemize}
+These videos show the 3D directivity plots from different directions, as well as for different source frequencies. \\
+
+The source code for this project is available through a request at \href{mailto:max.snijders@gmail.com}{max.snijders@gmail.com} because the files are too large to be included here.
+
+Some statistics for the source code so that you can get an idea of the scale of the model: \\
+\begin{center}
+\begin{tabular}{l | r}
+Type & Count \\
+\hline
+Files & 19 \\
+Words & 3463 \\
+Characters & 33 063 \\
+\end{tabular}
+\end{center}
+
+This file contains about 4300 words.
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+
+\begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
+\bibitem{verg13} Voltage Across the Terminals of a Receiving Antenna
+Kirk. T. McDonald \\
+Joseph Henry Laboratories, \\
+Princeton University, \\
+June 27, 2013
+\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+
+\end{multicols}
+
+\end{document}
